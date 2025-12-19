@@ -1,28 +1,5 @@
-from collections import defaultdict
-
-from pyparsing import deque
-
-UP = (0, 1)
-DOWN = (0, -1)
-RIGHT = (1, 0)
-LEFT = (-1, 0)
-UP_RIGHT = (1, 1)
-UP_LEFT = (-1, 1)
-DOWN_RIGHT = (1, -1)
-DOWN_LEFT = (-1, -1)
-
-BASIC_DIRECTIONS = [UP, DOWN, RIGHT, LEFT]
-
-ALL_DIRECTIONS = [
-    UP,
-    DOWN,
-    RIGHT,
-    LEFT,
-    UP_RIGHT,
-    UP_LEFT,
-    DOWN_RIGHT,
-    DOWN_LEFT,
-]
+from collections import defaultdict, deque
+from utils import directions
 
 
 def get_starting_point(inputs: list[str]) -> tuple[int, int]:
@@ -106,7 +83,7 @@ def part1(inputs: list[str]) -> int:
             if not tree_count:
                 return depth
 
-            for dr, dc in BASIC_DIRECTIONS:
+            for dr, dc in directions.BASIC_DIRECTIONS:
                 nr, nc = r + dr, c + dc
                 if (
                     (nr, nc) not in visited
@@ -139,7 +116,7 @@ def part2(inputs: list[str]) -> int:
             if not tree_count:
                 return depth
 
-            for dr, dc in BASIC_DIRECTIONS:
+            for dr, dc in directions.BASIC_DIRECTIONS:
                 nr, nc = r + dr, c + dc
                 if (
                     (nr, nc) not in visited
@@ -171,7 +148,7 @@ def part3(inputs: list[str]) -> int:
                 if inputs[r][c] != "P":
                     d[(r, c)] += depth
 
-                for dr, dc in BASIC_DIRECTIONS:
+                for dr, dc in directions.BASIC_DIRECTIONS:
                     nr, nc = r + dr, c + dc
                     if (
                         0 <= nr < m
